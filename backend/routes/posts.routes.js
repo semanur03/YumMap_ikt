@@ -4,9 +4,33 @@ const Post = require('../models/posts')
 const upload = require('../middleware/upload')
 const mongoose = require('mongoose')
 require('dotenv').config()
+const webpush = require('web-push');
 
 const connection = mongoose.createConnection(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true, dbName: process.env.DB_NAME });
 /* ----------------- POST ---------------------------- */
+
+const publicVapidKey = 'BIjLhKcQvhGxSmc6WbRn2bGzXvp-e3mXmZLN87h1YHabyB6QCZAZv38qfA1sOCJKOq6WsyzHjqmsbAlV3Dx9hR0';
+const privateVapidKey = 'R0KYY6LSn5hOxR6xiDK7UiZRMuRPlI5jBwS809QhP-M';
+const pushSubscription = {
+    endpoint: 'https://fcm.googleapis.com/fcm/send/dtpY18104yM:APA91bFWK97mywVrJfNW2-aTQgszapR0pj7G6Rv7PPGRzLpi2M7UduOn-MfoE0_jGK-DOFmsJ-3y18JMnXllHqsZyhOsZovUenTA-z1ycM5JRN1WLM7NBt1LaTD4bsjGnPBQQAXE9VU_',       
+    keys: {
+        p256dh: 'BINuOb82zUlGfizQZdH8KMYI19EUxDv8tLV25kYO8pMr553ipgoiheR5L88qfXUL4X1yYDojo2AUhSRaE4GeGVE',
+        auth: '8C_UKrnxs3ycgPrRRcqzIg'
+      }
+};
+
+function sendNotification() {
+    webpush.setVapidDetails('mailto:semanur.uyar@student.htw-berlin.de', publicVapidKey, privateVapidKey);
+    const payload = JSON.stringify({
+        title: 'New Push Notification',
+        content: 'New data in database!',
+        openUrl: '/help'
+    });
+    webpush.sendNotification(pushSubscription,payload)
+        .catch(err => console.error(err));
+    console.log('push notification sent');
+    // res.status(201).json({ message: 'push notification sent'});
+}
 
 // POST one post
 router.post('/', upload.single('file'), async(req, res) => {
@@ -23,7 +47,8 @@ router.post('/', upload.single('file'), async(req, res) => {
         })
         console.log('newPost', newPost)
         await newPost.save();
-        res.send(newPost)
+        sendNotification();
+        return res.send(newPost)
     }
 })
 

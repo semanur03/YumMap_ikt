@@ -2,7 +2,7 @@
     "name": "YumMap",
     "id": "index.html",
     "short_name": "HTW Insta",
-    "start_url": "/index.htmnl",
+    "start_url": "/index.html",
     "display": "standalone",
     "background-color": "#76B9000",
     "theme-color": "#FF5F00",

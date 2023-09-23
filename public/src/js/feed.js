@@ -256,7 +256,29 @@ form.addEventListener('submit', event => {
   console.log('locationInput', locationValue)
   console.log('file', file)
 
-  sendDataToBackend();
+  if('serviceWorker' in navigator && 'SyncManager' in window) {
+    navigator.serviceWorker.ready
+        .then( sw => {
+            let post = {
+                id: new Date().toISOString(),
+                title: titleValue,
+                location: locationValue,
+                image_id: file      // file durch den Foto-Button belegt
+            };
+            
+            writeData('sync-posts', post)
+                    .then( () => {
+                        return sw.sync.register('sync-new-post');
+                    })
+                    .then( () => {
+                        let snackbarContainer = new MaterialSnackbar(document.querySelector('#confirmation-toast'));
+                        let data = { message: 'Eingaben zum Synchronisieren gespeichert!', timeout: 2000};
+                        snackbarContainer.showSnackbar(data);
+                    });
+            });
+    } else {
+        sendDataToBackend();
+    }
 });
 
 captureButton.addEventListener('click', event => {

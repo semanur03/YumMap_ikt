@@ -20,7 +20,7 @@ self.addEventListener('install', event => {
                     '/src/js/idb.js',
                     '/src/css/app.css',
                     '/src/css/feed.css',
-                    '/src/images/htw.jpg',
+                    '/src/images/kitty.jpg',
                     'https://fonts.googleapis.com/css?family=Roboto:400,700',
                     'https://fonts.googleapis.com/icon?family=Material+Icons',
                     'https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css'
@@ -49,10 +49,11 @@ self.addEventListener('fetch', event => {
     // check if request is made by chrome extensions or web page
     // if request is made for web page url must contains http.
     if (!event.request.url.includes('http')) return;        // skip the request. if request is not made with http protocol
-    //if (event.request.url.includes('myFile.jpg')) return;   // skip the request. see feed.js fetch(imageURI)
+    if (event.request.url.includes('myFile.jpg')) return;   // skip the request. see feed.js fetch(imageURI)
 
     const url = 'http://localhost:3000/posts';
     if(event.request.url.indexOf(url) >= 0) {
+        console.log('event.request', event.request)
         event.respondWith(
             fetch(event.request)
                 .then ( res => {
@@ -91,5 +92,40 @@ self.addEventListener('fetch', event => {
                     }
                 })
         )
+    }
+})
+
+self.addEventListener('sync', event => {
+    console.log('service worker --> background syncing ...', event);
+    if(event.tag === 'sync-new-post') {
+        console.log('service worker --> syncing new posts ...');
+        event.waitUntil(
+            readAllData('sync-posts')
+                .then( dataArray => {
+                    for(let data of dataArray) {
+                        console.log('data from IndexedDB', data);
+                        const formData = new FormData();
+                        formData.append('title', data.title);
+                        formData.append('location', data.location);
+                        formData.append('file', data.image_id);
+
+                        console.log('formData', formData)
+
+                        fetch('http://localhost:3000/posts', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then( response => {
+                            console.log('Data sent to backend ...', response);
+                            if(response.ok) {
+                                deleteOneData('sync-posts', data.id)
+                            }
+                        })
+                        .catch( err => {
+                            console.log('Error while sending data to backend ...', err);
+                        })
+                    }
+                })
+        );
     }
 })

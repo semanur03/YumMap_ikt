@@ -10,7 +10,7 @@ router.post('/', async(req, res) => {
     console.log('subscription', subscription);
     res.status(201).json({ message: 'subscription received'});
 
-    webpush.setVapidDetails('mailto:freiheit@htw-berlin.de', publicVapidKey, privateVapidKey);
+    webpush.setVapidDetails('mailto:semanur.uyar@student.htw-berlin.de', publicVapidKey, privateVapidKey);
 });
 
 module.exports = router;

@@ -64,7 +64,7 @@ function configurePushSubscription() {
         .then( sub => {
             if(sub === null) {
                 // create a new subscription
-                let vapidPublicKey = 'BIjLhKcQvhGxSmc6WbRn2bGzXvp-e3mXmZLN87h1YHabyB6QCZAZv38qfA1sOCJKOq6WsyzHjqmsbAlV3Dx9hR0'
+                let vapidPublicKey = 'BHYYJgIo2W1QmEN4SRAOedSkahuF9_8z9DVjnNr6oa-9r4x7yumrAuvRz-jxGdulhD1uJ6eF9oxu9ZxlmE0Qnj4'
                 let convertedVapidPublicKey = urlBase64ToUint8Array(vapidPublicKey);
                 return swReg.pushManager.subscribe({
                     userVisibleOnly: true,
@@ -75,10 +75,10 @@ function configurePushSubscription() {
                 * aber neue erstellt werden soll
                 */
 
-                sub.unsubscribe()
+                /*sub.unsubscribe()
                 .then( () => {
                     console.log('unsubscribed()', sub)
-                })
+                })*/
             }
         })
         .then( newSub => {

@@ -9,13 +9,13 @@ const webpush = require('web-push');
 const connection = mongoose.createConnection(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true, dbName: process.env.DB_NAME });
 /* ----------------- POST ---------------------------- */
 
-const publicVapidKey = 'BIjLhKcQvhGxSmc6WbRn2bGzXvp-e3mXmZLN87h1YHabyB6QCZAZv38qfA1sOCJKOq6WsyzHjqmsbAlV3Dx9hR0';
-const privateVapidKey = 'R0KYY6LSn5hOxR6xiDK7UiZRMuRPlI5jBwS809QhP-M';
+const publicVapidKey = 'BHYYJgIo2W1QmEN4SRAOedSkahuF9_8z9DVjnNr6oa-9r4x7yumrAuvRz-jxGdulhD1uJ6eF9oxu9ZxlmE0Qnj4';
+const privateVapidKey = 'HLyTID69J9QyCvA9CDIzAa6PmawbsjAsBvGNDAikkD4';
 const pushSubscription = {
-    endpoint: 'https://fcm.googleapis.com/fcm/send/dtpY18104yM:APA91bFWK97mywVrJfNW2-aTQgszapR0pj7G6Rv7PPGRzLpi2M7UduOn-MfoE0_jGK-DOFmsJ-3y18JMnXllHqsZyhOsZovUenTA-z1ycM5JRN1WLM7NBt1LaTD4bsjGnPBQQAXE9VU_',       
+    endpoint: 'https://fcm.googleapis.com/fcm/send/dY47--_98cs:APA91bFF9mqBhQYOsKgyK-LvFUq3K8n8CHNvpyUjhTllHENEH5flTGm27NPmLWd7-knK3XY6_87rq6ldmGlsBOpgeeOBTEWT5PlIVj3pqh2dZdf67SsRIYmGquSTqM85z964M15EhTlK',       
     keys: {
-        p256dh: 'BINuOb82zUlGfizQZdH8KMYI19EUxDv8tLV25kYO8pMr553ipgoiheR5L88qfXUL4X1yYDojo2AUhSRaE4GeGVE',
-        auth: '8C_UKrnxs3ycgPrRRcqzIg'
+        p256dh: 'BHR-FZrEdqf48LYbsX7oZYCg7GeUqjc2Zadj_p7E1Yx83yf6p4qyohvEqbqTr0XY6V0Cxj3dRsE8ILN85V9Z8Fc',
+        auth: 'JnodUdTyRI6SBzgz_z7_KQ'
       }
 };
 

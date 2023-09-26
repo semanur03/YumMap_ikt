@@ -27,6 +27,9 @@
   <link rel="apple-touch-icon" href="/public/src/images/AppImages/144.png" sizes="144x144">
   <link rel="apple-touch-icon" href="/public/src/images/AppImages/180.png" sizes="180x180">
   <link rel="apple-touch-icon" href="/public/src/images/AppImages/512.png" sizes="152x152">
+  <link rel="stylesheet" href="/src/css/styles.css">
+  <!-- Fontawesome CDN Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 <body>
 
@@ -76,6 +79,20 @@
               <h6>Bild auswählen</h6>
               <input type="file" accept="image/*" id="image-picker">
           </div>
+          <br>
+          <div class="body">
+            <div class="rating-box">
+              <header>How was your experience?</header>
+              <div class="stars">
+                <i class="fa-solid fa-star" data-value="1" id="star1"></i>
+                <i class="fa-solid fa-star" data-value="2" id="star2"></i>
+                <i class="fa-solid fa-star" data-value="3" id="star3"></i>
+                <i class="fa-solid fa-star" data-value="4" id="star4"></i>
+                <i class="fa-solid fa-star" data-value="5" id="star5"></i>
+              </div>
+            </div>
+          </div>
+          <br>
           <div class="input-section mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="title">
             <label class="mdl-textfield__label" for="title" name="title">Titel</label>

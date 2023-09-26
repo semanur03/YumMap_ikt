@@ -43,6 +43,7 @@ router.post('/', upload.single('file'), async(req, res) => {
         const newPost = new Post({
             title: req.body.title,
             location: req.body.location,
+            rating: req.body.rating,
             image_id: req.file.filename
         })
         console.log('newPost', newPost)
@@ -75,6 +76,7 @@ function getOnePost(id) {
             let getPost = new Post({
                 "title": post.title,
                 "location": post.location, 
+                "rating": post.rating, 
                 "image_id": base64file
             });
             //console.log('getPost', getPost)

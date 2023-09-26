@@ -178,6 +178,22 @@ function createCard(card) {
   cardSupportingText.textContent = card.location;
   cardSupportingText.style.textAlign = 'center';
   cardWrapper.appendChild(cardSupportingText);
+
+  // Sterne hinzufügen
+  const starsContainer = document.createElement('div');
+  starsContainer.classList.add('stars-container');
+
+  for (let i = 1; i <= 5; i++) {
+    const star = document.createElement('i');
+    star.classList.add('fa-solid', 'fa-star');  // Hier fügst du die gleichen Klassen hinzu
+    if (i <= card.rating) {
+      star.style.color = 'gold';
+    }
+    starsContainer.appendChild(star);
+  }
+
+  cardWrapper.appendChild(starsContainer);
+
   componentHandler.upgradeElement(cardWrapper);
   sharedMomentsArea.appendChild(cardWrapper);
 }
@@ -209,11 +225,12 @@ function updateUI(data) {
   }
 }
 
-function sendDataToBackend() {
+function sendDataToBackend(rating) {
   const formData = new FormData();
   formData.append('title', titleValue);
   formData.append('location', locationValue);
   formData.append('file', file);
+  formData.append('rating', rating); 
 
   console.log('formData', formData)
 
@@ -230,7 +247,8 @@ function sendDataToBackend() {
       const newPost = {
           title: data.title,
           location: data.location,
-          image_id: imageURI
+          image_id: imageURI,
+          rating: rating 
       }
       updateUI([newPost]);
   });
@@ -263,10 +281,12 @@ form.addEventListener('submit', event => {
                 id: new Date().toISOString(),
                 title: titleValue,
                 location: locationValue,
-                image_id: file      // file durch den Foto-Button belegt
+                image_id: file,    // file durch den Foto-Button belegt
+                rating: chosenRating ,              
             };
             
             writeData('sync-posts', post)
+
                     .then( () => {
                         return sw.sync.register('sync-new-post');
                     })
@@ -277,7 +297,7 @@ form.addEventListener('submit', event => {
                     });
             });
     } else {
-        sendDataToBackend();
+        sendDataToBackend(chosenRating);
     }
 });
 
@@ -306,4 +326,31 @@ captureButton.addEventListener('click', event => {
 
 imagePicker.addEventListener('change', event => {
   file = event.target.files[0];
+});
+
+
+let chosenRating = 0; // Default rating is 0
+
+document.addEventListener('DOMContentLoaded', () => {
+    const stars = document.querySelectorAll('.stars i');
+
+    function updateStarColors(clickedValue) {
+        stars.forEach(star => {
+            const starValue = parseInt(star.getAttribute('data-value'));
+            if (starValue <= clickedValue) {
+                star.style.color = 'yellow';
+            } else {
+                star.style.color = 'black';
+            }
+        });
+    }
+
+    stars.forEach(star => {
+        star.addEventListener('click', event => {
+            const clickedValue = event.target.getAttribute('data-value');
+            updateStarColors(clickedValue);
+            chosenRating = clickedValue; 
+            console.log('Chosen rating:', clickedValue);
+        });
+    });
 });

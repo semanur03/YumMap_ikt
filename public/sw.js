@@ -1,7 +1,7 @@
 importScripts('/src/js/idb.js');
 importScripts('/src/js/db.js');
 
-const CACHE_VERSION = 9;
+const CACHE_VERSION = 10;
 const CURRENT_STATIC_CACHE = 'static-v'+CACHE_VERSION;
 const CURRENT_DYNAMIC_CACHE = 'dynamic-v'+CACHE_VERSION;
 
@@ -20,6 +20,7 @@ self.addEventListener('install', event => {
                     '/src/js/idb.js',
                     '/src/css/app.css',
                     '/src/css/feed.css',
+                    '/src/css/styles.css',
                     '/src/images/kitty.jpg',
                     'https://fonts.googleapis.com/css?family=Roboto:400,700',
                     'https://fonts.googleapis.com/icon?family=Material+Icons',
@@ -108,6 +109,7 @@ self.addEventListener('sync', event => {
                         formData.append('title', data.title);
                         formData.append('location', data.location);
                         formData.append('file', data.image_id);
+                        formData.append('rating', data.rating);
 
                         console.log('formData', formData)
 

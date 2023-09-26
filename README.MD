@@ -16,6 +16,7 @@ Ebenso gibt man dem ganzen dann auch noch eine Bewertung in Form von Sternen (1 
 #### Feed/Bilder:
 
 Das ist der Feed, wo die ganzen Posts zu sehen sind die man erstellt hat. Das älteste ist ganz unten und die neusten Posts dann ganz oben.
+Außerdem steht aus jedem Post das Datum an dem es erstellt wurde.
 
 ![Feed](seite1.png)
 

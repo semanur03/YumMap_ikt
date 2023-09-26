@@ -160,6 +160,7 @@ closeCreatePostModalButton.addEventListener('click', closeCreatePostModal);
 function createCard(card) {
   let cardWrapper = document.createElement('div');
   cardWrapper.className = 'shared-moment-card mdl-card mdl-shadow--2dp';
+  cardWrapper.style.marginBottom = '30px';
   let cardTitle = document.createElement('div');
   cardTitle.className = 'mdl-card__title';
   let image = new Image();

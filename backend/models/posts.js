@@ -7,6 +7,10 @@ const schema = new mongoose.Schema({
     rating: {
         type: Number,
         default: 0 // Standard-Rating von 0, wenn keines angegeben ist
+    },
+    date: {
+        type: Date,
+        default: Date.now // Standard-Datum von jetzt, wenn keines angegeben ist
     }
 })
 

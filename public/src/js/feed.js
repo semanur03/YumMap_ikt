@@ -173,9 +173,14 @@ function createCard(card) {
   cardTitleTextElement.textContent = card.title;
   cardTitleTextElement.classList.add('whiteText');
   cardTitle.appendChild(cardTitleTextElement);
+
+  // Extracting the date in "YYYY-MM-DD" format
+  const cardDate = new Date(card.date);
+  const formattedDate = `${cardDate.getFullYear()}-${('0' + (cardDate.getMonth() + 1)).slice(-2)}-${('0' + cardDate.getDate()).slice(-2)}`;
+
   let cardSupportingText = document.createElement('div');
   cardSupportingText.className = 'mdl-card__supporting-text';
-  cardSupportingText.textContent = card.location;
+  cardSupportingText.textContent = ` ${card.location} |  ${formattedDate}`; // Displaying location and date
   cardSupportingText.style.textAlign = 'center';
   cardSupportingText.style.fontSize = '15px';
   cardSupportingText.style.marginTop = '5px';
@@ -234,12 +239,14 @@ function updateUI(data) {
   }
 }
 
-function sendDataToBackend(rating) {
+function sendDataToBackend(rating, currentDate) {
   const formData = new FormData();
   formData.append('title', titleValue);
   formData.append('location', locationValue);
   formData.append('file', file);
   formData.append('rating', rating); 
+
+  formData.append('date', currentDate.toISOString());
 
   console.log('formData', formData)
 
@@ -257,11 +264,14 @@ function sendDataToBackend(rating) {
           title: data.title,
           location: data.location,
           image_id: imageURI,
-          rating: rating 
+          rating: rating,
+          date: currentDate 
       }
       updateUI([newPost]);
   });
 }
+
+let postCreationDateTime;
 
 form.addEventListener('submit', event => {
   event.preventDefault(); // nicht absenden und neu laden
@@ -277,6 +287,8 @@ form.addEventListener('submit', event => {
 
   closeCreatePostModal();
 
+  const currentDate = new Date();  // Capture the current date and time
+
   titleValue = titleInput.value;
   locationValue = locationInput.value;
   console.log('titleInput', titleValue)
@@ -291,7 +303,8 @@ form.addEventListener('submit', event => {
                 title: titleValue,
                 location: locationValue,
                 image_id: file,    // file durch den Foto-Button belegt
-                rating: chosenRating ,              
+                rating: chosenRating,
+                date: currentDate              
             };
             
             writeData('sync-posts', post)
@@ -306,7 +319,7 @@ form.addEventListener('submit', event => {
                     });
             });
     } else {
-        sendDataToBackend(chosenRating);
+        sendDataToBackend(chosenRating, currentDate);
     }
 });
 

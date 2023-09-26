@@ -177,6 +177,8 @@ function createCard(card) {
   cardSupportingText.className = 'mdl-card__supporting-text';
   cardSupportingText.textContent = card.location;
   cardSupportingText.style.textAlign = 'center';
+  cardSupportingText.style.fontSize = '15px';
+  cardSupportingText.style.marginTop = '5px';
   cardWrapper.appendChild(cardSupportingText);
 
   // Sterne hinzufügen
@@ -186,13 +188,19 @@ function createCard(card) {
   for (let i = 1; i <= 5; i++) {
     const star = document.createElement('i');
     star.classList.add('fa-solid', 'fa-star');  // Hier fügst du die gleichen Klassen hinzu
+    star.style.marginRight = '7px'; // Abstand der Sterne zueinander
+    star.style.fontSize = '20px'; // Größe der Sterne
+    
     if (i <= card.rating) {
       star.style.color = 'gold';
     }
     starsContainer.appendChild(star);
   }
+  starsContainer.style.marginBottom = '15px'; // Adjust the value as needed
+
 
   cardWrapper.appendChild(starsContainer);
+  starsContainer.style.textAlign = 'center';
 
   componentHandler.upgradeElement(cardWrapper);
   sharedMomentsArea.appendChild(cardWrapper);

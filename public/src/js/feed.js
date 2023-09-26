@@ -227,7 +227,8 @@ fetch('http://localhost:3000/posts')
 
 
 function updateUI(data) {
-  for(let card of data)
+    const reversedData = data.reverse();    //ändert die reihenfolge der posts. neuste ganz oben älteste unten
+    for(let card of reversedData)
   {
      createCard(card);
   }

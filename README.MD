@@ -1,24 +1,63 @@
-# Progressive Web Apps - Aktuelle Trends der IKT 2022
+# YumMap - Aktuelle Trends der IKT 2023
 
-Dieses Projekt enthält das Grundgerüst einer Webanwendung. Auf diesem Grundgerüst bauen wir auf und fügen sukzessive *progressive* Funktionalitäten hinzu, so dass am Ende eine *Progressive Web Application* entsteht. 
+## Inhaltsverzeichnis
+1. [Allgemeine Informationen](#allgemeine-information)
+2. [Information zur Anwendung](#information-zur-anwendung)
+3. [Installation](#installation)
+4. [Technologien](#technologien)
+
+### Allgemeine Information
+***
+Die Anwendung ist dazu gedacht, dass wenn man irgendwo essen war, man ein Foto entweder vom Laden oder vom Esseb macht den Namen des Ortes und den Standort eingibt. 
+Ebenso gibt man dem ganzen dann auch noch eine Bewertung in Form von Sternen (1 Stern = nicht gut, 5 Sterne = sehr gut), wenn man kein Stern ausfüllt werden am Ende 5 schwarze Sterne auf dem Post hinterlassen.
+
+### Information zur Anwendung
+***
+#### Feed/Bilder:
+
+Das ist der Feed, wo die ganzen Posts zu sehen sind die man erstellt hat. Das älteste ist ganz oben und die neusten ganz unten.
+
+![Feed](seite1.png)
+
+#### CreatePost (+):
+
+Wenn man auf das Plus klickt, dass unten in der rechten Ecke schwebt, kann man einen neuen post erstellen.
+
+Buttons:
+
+Foto: erstellt das Foto
+Location: erstellt automatisch den exacten Standort für das Inputfeld Ort
+Speicher: die Einträge werden gespeichert und in die Datenbank eingetragen
+X: Vorgang wird abgebrochen
+
+![CreatePost](seite2.png)
+
+#### Hamburger-Menü:
+
+- Damit kann man zur Hilfe-seite springen
+- Benachrichtigungen einschalten
+- Die PWA installieren
+
+![Hamburger-Menü](seite3.png)
 
 ## Installation
 
-- Zum Ausführen des Projektes wird [Node.js](https://nodejs.org) verendet. Sie müssen es auf Ihren Rechner installieren. 
+1. Repository clonen <br>
+[GitHub Repository ](https://github.com/semanur03/YumMap_ikt.git)
 
-- In der Wahl Ihrer IDE sind Sie völlig frei. Empfehlungen finden Sie unter [https://freiheit.f4.htw-berlin.de/ikt/tools/#integrated-development-environment-ide](https://freiheit.f4.htw-berlin.de/ikt/tools/#integrated-development-environment-ide)
+2. Frontend
 
-- Zum Starten des Projektes wechseln Sie im Terminal (Terminal Ihres Rechners oder das Terminal in der IDE) in den Projektordner (`cd IKT-PWA-01`) und führen dort 
+- Zum Starten des Projektes wechseln Sie im Terminal (Terminal Ihres Rechners oder das Terminal in der IDE) in den Projektordner (`YumMap_ikt`) und führen dort 
 
 	`npm install` 
 
-	aus (es genügt auch `npm i`). Damit werden alle erforderlichen Abhängigkeiten installiert. Es entsteht der `node_modules`-Ordner. 
+	aus. Damit werden alle erforderlichen Abhängigkeiten installiert.
 
 - Nach erfolgreicher Installation der Abhängigkeiten, geben Sie  
 
 	`npm start` 
 
-	ein, um Ihr Projekt auszuführen (Es wird der `http-server` mit der Option `-c-1` gestartet. Diese Option disabled Caching). Klicken Sie danach auf [localhost:8080](http://localhost:8080) oder geben Sie die URL direkt in Ihren Browser ein.
+	ein, um Ihr Projekt auszuführen. Klicken Sie danach auf [localhost:8080](http://localhost:8080) oder geben Sie die URL direkt in Ihren Browser ein.
 
 - Sollten Sie Änderungen an der IMplementierung vornehmen und diese ausprobieren wollen, müssen Sie den Server zunächst wieder stoppen:
 
@@ -30,24 +69,25 @@ Dieses Projekt enthält das Grundgerüst einer Webanwendung. Auf diesem Grundger
 
 	ein. 
 
-## Anpassungen
+3. Backend
 
-Wir verwenden [Material Design Lite](https://getmdl.io/) für das Design unserer Anwendung. Sie können natürlich auch andere CSS-Frameworks verwenden. Sollte Ihnen die aktuelle Farbkombination aus `blue-grey` und `red` nicht zusagen, können Sie in den `index.html`-Datein (im `public`- und im `public/help`-Ordner auch eine andere Kombination auswählen (siehe
+- Zum Starten des Backendes wechseln Sie im Terminal (Terminal Ihres Rechners oder das Terminal in der IDE) in den Projektordner (`YumMap_ikt/backend`) und erstellen dort
 
-`href="https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css"`
+	`.env`-Datei
 
-Andere Farbkombinationen finden Sie [hier](https://getmdl.io/customize/#cdn-code). Es genügt auch, die entsprechenden Farben in den Dateinamen einzutragen 
+	Das Backend ist ohne ein Zertigfikat mit MongoDB verbunden
+	
+	DB_CONNECTION = (Ihr Link zur verbindung mit MongoDB Atlas)
+	DATABASE =YumMap
+	COLLECTION=posts
+	PORT=3000	
 
-`material.{primary}-{accent}.min.css` 
+- `npm i`
+- `npm run watch`
 
-(z.B. `material.indigo-pink.min.css`).
-
---
-
-Sie können natürlich auch ein anderes Bild als das HTW-Bild einbinden. Beachten Sie dabei nur, dass wir mithilfe responsiven Verhaltens drei verschiedene Bilder davon benötigen, idealerweise mit den Pixel-Maßen `1200 x 457` (`*-lg.jpg`), `900 x 343` (`*.jpg`) und `480 x 183` (`*-sm.jpg`). Siehe dann die `public/index.html`.
-
---
-
-Binden Sie ruhig Ihr eigenes `favicon.ico` in den Projektordner ein. Erstellen können Sie sich ein solches `favicon` z.B. [hier](https://favicon.io/) oder [hier](https://www.ionos.de/tools/favicon-generator). Macht Spaß und gibt allen Ihren Webanwendungen eine persönliche Note ;-).
-
- 
+### Technologien
+*** 
+1. Visual Studio Code
+2. MongoDB
+3. Node.js
+4. Material Design Lite
